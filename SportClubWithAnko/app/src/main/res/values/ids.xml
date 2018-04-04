@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="conteiner_toolbar" type="id" />
+    <item name="linear_layout" type="id" />
+    <item name="nav_bar" type="id" />
+    <item name="fullName" type="id" />
+    <item name="image_trainer" type="id" />
+    <item name="recycler_news" type="id" />
+</resources>
