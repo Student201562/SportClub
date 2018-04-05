@@ -1,10 +1,10 @@
 package com.example.kiril.sportclubwithanko.ComponentsAnco
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.support.design.widget.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
 import android.view.Gravity
-import android.widget.LinearLayout
 import android.widget.LinearLayout.VERTICAL
 import android.widget.TextView
 import com.example.kiril.sportclubwithanko.R
@@ -14,7 +14,6 @@ import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.design.navigationView
 import org.jetbrains.anko.design.themedAppBarLayout
 import org.jetbrains.anko.support.v4._DrawerLayout
-
 class DrawUI(context: Context) : _DrawerLayout(context) {
 
     private lateinit var textBlock: TextView
@@ -27,7 +26,7 @@ class DrawUI(context: Context) : _DrawerLayout(context) {
                 toolbar{
                     fitsSystemWindows = true
                     id = R.id.toolbar
-                    backgroundColor = Color.rgb(140,34,32) // #8C2220
+                    backgroundColor = Color.rgb(140,34,32) // #8C2220 - 140,34,32 - красно-темный
                     popupTheme = R.style.AppTheme_PopupOverlay
                     title = resources.getString(R.string.app_name)
                     relativeLayout {
@@ -50,27 +49,29 @@ class DrawUI(context: Context) : _DrawerLayout(context) {
         navigationView {
             id = R.id.nav_bar
             fitsSystemWindows = true
-            backgroundColor = Color.rgb(181,44,42) // B52C2A
+            backgroundColor = Color.rgb(181,44,42) // B52C2A - 181,44,42 - красно-светлый
 
             val header = context.themedLinearLayout(R.style.Base_ThemeOverlay_AppCompat_Dark) {
                 orientation = VERTICAL
                 horizontalPadding = dip(16)
                 verticalPadding = dip(16)
                 gravity = Gravity.BOTTOM
-                backgroundColor = R.drawable.side_nav_bar
+                backgroundColor = Color.rgb(140,34,32)
 
                 imageView {
                     setImageResource(R.mipmap.ic_launcher_foreground)
                 }.lparams(wrapContent, wrapContent){
-                    topPadding = dip(8)
+                    topPadding = dip(10)
                 }
 
-                textView("MyName") {
+                textView("Gylever") {
                     topPadding = dip(16)
-                }.lparams(wrapContent, wrapContent)
+                    textColor = Color.WHITE
+                    textSize = 20f
+                }.lparams(wrapContent, wrapContent){
+                    leftPadding = dip(30)
+                }
 
-                textView("MyName") {
-                }.lparams(wrapContent, wrapContent)
 
             }.lparams(matchParent, dip(176))
             addHeaderView(header)

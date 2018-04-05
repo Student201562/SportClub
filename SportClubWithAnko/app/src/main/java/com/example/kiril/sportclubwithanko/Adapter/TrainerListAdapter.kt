@@ -23,10 +23,7 @@ class TrainerListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : TrainerListAdapter.TrainerListViewHolder {
 
-
         val view = TrainerListView(parent.context)
-        val width = RecyclerView.LayoutParams.MATCH_PARENT
-        val height = 400
         view.layoutParams = RecyclerView.LayoutParams(MATCH_PARENT, 400)
 
         return TrainerListViewHolder(view)

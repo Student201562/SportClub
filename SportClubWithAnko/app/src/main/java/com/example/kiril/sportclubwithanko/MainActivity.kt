@@ -12,9 +12,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.LinearLayout.VERTICAL
+import com.example.kiril.sportclubwithanko.Adapter.DiscountListAdapter
 import com.example.kiril.sportclubwithanko.Adapter.TrainerListAdapter
 import com.example.kiril.sportclubwithanko.ComponentsAnco.DrawUI
-import com.example.kiril.sportclubwithanko.Data.loadingData
+import com.example.kiril.sportclubwithanko.Data.loadingDataDiscountInfo
+import com.example.kiril.sportclubwithanko.Data.loadingDataTrainerInfo
 import com.example.kiril.sportclubwithanko.Data.loadingTrainerInfo
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,8 +31,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private var trainersList = TrainerInfo.List()
     private val reposAdapter = TrainerListAdapter(trainersList)
-
     private lateinit var trainerV : RecyclerView
+
+    private var discountsList = DiscountInfo.List()
+    private val discountListAdapter = DiscountListAdapter(discountsList)
+    private lateinit var discountV : RecyclerView
+
     private lateinit var linearLayoutManager : LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,6 +86,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         when (item.itemId) {
             R.id.nav_camera -> {
+                find<LinearLayout>(R.id.linear_layout).apply {
+                    textView{
+                        text = "Наша компания"
+                        textSize = 30f
+                    }
+                }
+            }
+            R.id.nav_gallery -> {
                 linearLayoutManager = LinearLayoutManager(this)
                 find<LinearLayout>(R.id.linear_layout).apply {
                     linearLayout {
@@ -95,13 +109,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
 
                 launch(UI) {
-
                     val cachedPhotos = loadingTrainerInfo(application as App).await()
                     if (cachedPhotos.isNotEmpty()) {
                         trainersList.addAll(cachedPhotos)
                         trainerV.adapter.notifyDataSetChanged()
                     } else {
-                        val cloudPhotosJob = loadingData()
+                        val cloudPhotosJob = loadingDataTrainerInfo()
                         cloudPhotosJob.start()
                         val cloudPhotos = cloudPhotosJob.await()
                         savePhotos(application as App, cloudPhotos)
@@ -109,20 +122,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         trainerV.adapter.notifyDataSetChanged()
                     }
                 }
-            }
-            R.id.nav_gallery -> {
-                find<LinearLayout>(R.id.linear_layout).apply {
-                    textView("text")
-                }
-            }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_manage -> {
 
             }
             R.id.nav_share -> {
+                linearLayoutManager = LinearLayoutManager(this)
+                find<LinearLayout>(R.id.linear_layout).apply {
+                    linearLayout {
+                        orientation = VERTICAL
 
+                        discountV = recyclerView {
+                            id = R.id.recycler_news
+                            lparams(matchParent, matchParent)
+                            adapter = discountListAdapter
+                            layoutManager = linearLayoutManager
+                        }
+                    }
+                }
+
+                launch(UI) {
+                    val cloudPhotosJob = loadingDataDiscountInfo()
+                    cloudPhotosJob.start()
+                    val cloudPhotos = cloudPhotosJob.await()
+                    discountsList.addAll(cloudPhotos)
+                    discountV.adapter.notifyDataSetChanged()
+                }
             }
             R.id.nav_send -> {
 
