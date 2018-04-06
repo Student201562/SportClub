@@ -3,7 +3,7 @@ package com.example.kiril.sportclubwithanko.ComponentsAnco
 import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.ImageView
-import com.example.kiril.sportclubwithanko.DiscountInfo
+import com.example.kiril.sportclubwithanko.Data.DiscountInfo
 import com.example.kiril.sportclubwithanko.R
 import org.jetbrains.anko.*
 

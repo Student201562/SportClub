@@ -1,4 +1,4 @@
-package com.example.kiril.sportclubwithanko
+package com.example.kiril.sportclubwithanko.DB
 
 import android.app.Application
 import android.arch.persistence.room.Room

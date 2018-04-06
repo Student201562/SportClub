@@ -4,7 +4,7 @@ import android.support.v7.widget.ListPopupWindow
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.example.kiril.sportclubwithanko.ComponentsAnco.DiscountListView
-import com.example.kiril.sportclubwithanko.DiscountInfo
+import com.example.kiril.sportclubwithanko.Data.DiscountInfo
 
 /**
  * Created by Kiril on 06.04.2018.

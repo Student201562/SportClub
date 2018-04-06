@@ -3,13 +3,10 @@ package com.example.kiril.sportclubwithanko.ComponentsAnco
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.support.v7.widget.PopupMenu
-import android.view.MenuItem
 import android.widget.ImageView
-import android.widget.PopupWindow
 import android.widget.Toast
 import com.example.kiril.sportclubwithanko.R
-import com.example.kiril.sportclubwithanko.TrainerInfo
+import com.example.kiril.sportclubwithanko.Data.TrainerInfo
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
@@ -59,20 +56,9 @@ class TrainerListView(context: Context) : _LinearLayout(context) {
                 textColor = Color.rgb(255,255,255)
                 backgroundColor = Color.rgb(181,44,42)
                 textSize = 16f
-//                onClick {
-//                    var popupMenu: PopupMenu? = null
-//                    popupMenu = PopupMenu(it!!.context, it)
-//                    popupMenu.inflate(R.layout.popup_window)
-//                    popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
-//                        when (item!!.itemId) {
-//                            R.id.image -> {
-//                                Toast.makeText(it.context, "Эта штука добавилась", Toast.LENGTH_LONG).show()
-//                            }
-//                        }
-//                        true
-//                    })
-//                    popupMenu.show()
-//                }
+                onClick {
+                    Toast.makeText(getContext(), "Тренер добавлен, Вам перезвонят", Toast.LENGTH_LONG).show()
+                }
             }.lparams{
                 topMargin = 30
                 leftMargin = 50

@@ -15,9 +15,10 @@ import android.widget.LinearLayout.VERTICAL
 import com.example.kiril.sportclubwithanko.Adapter.DiscountListAdapter
 import com.example.kiril.sportclubwithanko.Adapter.TrainerListAdapter
 import com.example.kiril.sportclubwithanko.ComponentsAnco.DrawUI
-import com.example.kiril.sportclubwithanko.Data.loadingDataDiscountInfo
-import com.example.kiril.sportclubwithanko.Data.loadingDataTrainerInfo
-import com.example.kiril.sportclubwithanko.Data.loadingTrainerInfo
+import com.example.kiril.sportclubwithanko.DB.App
+import com.example.kiril.sportclubwithanko.DB.savePhotos
+import com.example.kiril.sportclubwithanko.Data.DiscountInfo
+import com.example.kiril.sportclubwithanko.Data.TrainerInfo
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.experimental.launch

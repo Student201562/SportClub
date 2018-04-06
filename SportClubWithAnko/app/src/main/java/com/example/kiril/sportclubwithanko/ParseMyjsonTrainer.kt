@@ -1,8 +1,8 @@
-package com.example.kiril.sportclubwithanko.Data
+package com.example.kiril.sportclubwithanko
 
-import com.example.kiril.sportclubwithanko.TrainerInfo
-import com.example.kiril.sportclubwithanko.App
-import com.example.kiril.sportclubwithanko.DiscountInfo
+import com.example.kiril.sportclubwithanko.DB.App
+import com.example.kiril.sportclubwithanko.Data.DiscountInfo
+import com.example.kiril.sportclubwithanko.Data.TrainerInfo
 import com.google.gson.Gson
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Deferred

@@ -3,7 +3,7 @@ import android.support.v7.widget.ListPopupWindow.MATCH_PARENT
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.example.kiril.sportclubwithanko.ComponentsAnco.TrainerListView
-import com.example.kiril.sportclubwithanko.TrainerInfo
+import com.example.kiril.sportclubwithanko.Data.TrainerInfo
 
 
 class TrainerListAdapter(
