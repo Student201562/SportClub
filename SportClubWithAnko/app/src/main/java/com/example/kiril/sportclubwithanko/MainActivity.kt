@@ -1,5 +1,6 @@
 package com.example.kiril.sportclubwithanko
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -12,11 +13,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.LinearLayout.VERTICAL
+import com.example.kiril.sportclubwithanko.Adapter.CompanyAdapter
 import com.example.kiril.sportclubwithanko.Adapter.DiscountListAdapter
 import com.example.kiril.sportclubwithanko.Adapter.TrainerListAdapter
 import com.example.kiril.sportclubwithanko.ComponentsAnco.DrawUI
 import com.example.kiril.sportclubwithanko.DB.App
 import com.example.kiril.sportclubwithanko.DB.savePhotos
+import com.example.kiril.sportclubwithanko.Data.CompanyInfo
 import com.example.kiril.sportclubwithanko.Data.DiscountInfo
 import com.example.kiril.sportclubwithanko.Data.TrainerInfo
 import kotlinx.coroutines.experimental.android.UI
@@ -38,11 +41,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val discountListAdapter = DiscountListAdapter(discountsList)
     private lateinit var discountV : RecyclerView
 
+    private var companyInfo = CompanyInfo.List()
+    private val companyAdapter = CompanyAdapter(companyInfo)
+    private lateinit var companyV : RecyclerView
+
     private lateinit var linearLayoutManager : LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         draw = customView{}
         setContentView(draw)
@@ -82,16 +88,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        find<LinearLayout>(R.id.linear_layout).removeAllViews()
-        trainersList.clear()
+        cCleaner()
 
         when (item.itemId) {
             R.id.nav_camera -> {
+                linearLayoutManager = LinearLayoutManager(this)
                 find<LinearLayout>(R.id.linear_layout).apply {
-                    textView{
-                        text = "Наша компания"
-                        textSize = 30f
+                    linearLayout {
+                        orientation = VERTICAL
+
+                        companyV = recyclerView {
+                            id = R.id.recycler_news
+                            lparams(matchParent, matchParent)
+                            adapter = companyAdapter
+                            layoutManager = linearLayoutManager
+                        }
                     }
+                }
+
+                launch(UI) {
+                        val cloudPhotosJob = loadingDataCompanyInfo()
+                        cloudPhotosJob.start()
+                        val cloudPhotos = cloudPhotosJob.await()
+                        companyInfo.addAll(cloudPhotos)
+                        companyV.adapter.notifyDataSetChanged()
                 }
             }
             R.id.nav_gallery -> {
@@ -149,11 +169,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
             }
             R.id.nav_send -> {
-
+                find<LinearLayout>(R.id.linear_layout).apply {
+                    textView{
+                        text = "5 рублей занятие не шучу"
+                        textSize = 30f
+                    }
+                }
             }
         }
 
         draw.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun cCleaner(){
+        find<LinearLayout>(R.id.linear_layout).removeAllViews()
+        trainersList.clear()
+        discountsList.clear()
+        companyInfo.clear()
     }
 }

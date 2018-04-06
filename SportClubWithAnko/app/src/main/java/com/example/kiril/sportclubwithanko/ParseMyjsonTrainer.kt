@@ -1,6 +1,7 @@
 package com.example.kiril.sportclubwithanko
 
 import com.example.kiril.sportclubwithanko.DB.App
+import com.example.kiril.sportclubwithanko.Data.CompanyInfo
 import com.example.kiril.sportclubwithanko.Data.DiscountInfo
 import com.example.kiril.sportclubwithanko.Data.TrainerInfo
 import com.google.gson.Gson
@@ -41,6 +42,22 @@ fun loadingDataDiscountInfo(
 
     httpClient.newCall(request).execute().use {
         Gson().fromJson(it.body()!!.string(), DiscountInfo.List::class.java)
+    }
+}
+
+fun loadingDataCompanyInfo(
+        coroutineContext: CoroutineContext = CommonPool
+): Deferred<List<CompanyInfo>> = async(coroutineContext) {
+    // Создать клиент для HTTP запросов
+    val httpClient = OkHttpClient()
+
+    // Создать запрос
+    val request = Request.Builder()
+            .url("https://api.myjson.com/bins/19l9er")
+            .build()
+
+    httpClient.newCall(request).execute().use {
+        Gson().fromJson(it.body()!!.string(), CompanyInfo.List::class.java)
     }
 }
 

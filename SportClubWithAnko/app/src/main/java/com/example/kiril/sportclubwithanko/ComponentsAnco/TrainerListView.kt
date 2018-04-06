@@ -20,12 +20,14 @@ class TrainerListView(context: Context) : _LinearLayout(context) {
     @SuppressLint("ResourceType")
     fun bind(trainerInfo: TrainerInfo) {
 
-        relativeLayout{
+        relativeLayout {
+
+
             imageView {
                 id = 1
                 scaleType = ImageView.ScaleType.CENTER
                 backgroundResource = R.mipmap.ic_launcher_foreground
-            }.lparams{
+            }.lparams {
                 alignParentLeft()
             }
 
@@ -33,7 +35,7 @@ class TrainerListView(context: Context) : _LinearLayout(context) {
                 id = 2
                 text = trainerInfo.full_name
                 textSize = 18f
-            }.lparams(wrapContent, wrapContent){
+            }.lparams(wrapContent, wrapContent) {
                 topMargin = 30
                 leftMargin = 40
                 rightOf(1)
@@ -43,29 +45,38 @@ class TrainerListView(context: Context) : _LinearLayout(context) {
                 id = 3
                 text = trainerInfo.telephone
                 textSize = 16f
-            }.lparams(wrapContent, wrapContent){
+            }.lparams(wrapContent, wrapContent) {
                 topMargin = 40
                 leftMargin = 30
                 below(2)
                 rightOf(1)
             }
 
-            button{
+            button {
                 id = 4
                 text = "Заказать занятие"
-                textColor = Color.rgb(255,255,255)
-                backgroundColor = Color.rgb(181,44,42)
+                textColor = Color.rgb(255, 255, 255)
+                backgroundColor = Color.rgb(181, 44, 42)
                 textSize = 16f
                 onClick {
                     Toast.makeText(getContext(), "Тренер добавлен, Вам перезвонят", Toast.LENGTH_LONG).show()
                 }
-            }.lparams{
+            }.lparams {
                 topMargin = 30
                 leftMargin = 50
                 below(3)
                 rightOf(1)
             }
         }
+    }
 
+    fun SearchTrainer(trainerList: TrainerInfo.List){
+        val duplicate : ArrayList<TrainerInfo> = ArrayList()
+
+        for (itrainer in trainerList){
+            if(itrainer.full_name.contains("Бокиев Наврас Солиевич")){
+                duplicate.add(itrainer)
+            }
+        }
     }
 }
